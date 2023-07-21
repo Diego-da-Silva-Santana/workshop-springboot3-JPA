@@ -12,24 +12,24 @@ import java.util.Set;
 
 @Entity
 @Table(name = "tb_order")
-public class Order implements Serializable{
+public class Order implements Serializable {
 
     private static final long serialVersionUID = 1l;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'",timezone = "GMT")
-          private Instant moment;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
+    private Instant moment;
 
-        private Integer orderStatus;
-        @ManyToOne
-        @JoinColumn(name = "client_id")
-        private User client;
-        @OneToMany(mappedBy = "id.order")
-        private Set<OrderItem> items = new HashSet<>();
-        @OneToOne(mappedBy = "order",cascade = CascadeType.ALL)
-        private Payment payment;
+    private Integer orderStatus;
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private User client;
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItem> items = new HashSet<>();
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private Payment payment;
 
     public Order() {
     }
@@ -79,16 +79,17 @@ public class Order implements Serializable{
 
     public void setOrderStatus(OrderStatus orderStatus) {
         if (orderStatus != null)
-        this.orderStatus = orderStatus.getCode();
+            this.orderStatus = orderStatus.getCode();
     }
-    public Set<OrderItem> getItems(){
+
+    public Set<OrderItem> getItems() {
 
         return items;
     }
 
-    public  Double getTotal(){
+    public Double getTotal() {
         double sum = 0.0;
-        for (OrderItem x : items){
+        for (OrderItem x : items) {
             sum = sum + x.getSubTotal();
         }
 

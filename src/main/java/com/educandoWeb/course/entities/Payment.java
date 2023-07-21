@@ -6,13 +6,14 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
+
 @Entity
 @Table(name = "tb_payment")
 public class Payment implements Serializable {
     private static final long serialVersionUID = 1l;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long id;
+    private Long id;
     private Instant moment;
     @JsonIgnore
     @OneToOne

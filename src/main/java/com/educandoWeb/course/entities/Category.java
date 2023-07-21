@@ -12,11 +12,11 @@ import java.util.Set;
 @Table(name = "tb_category")
 public class Category implements Serializable {
 
-    private static final  long serialVersionUID = 1l;
+    private static final long serialVersionUID = 1l;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long id;
-    private  String name;
+    private Long id;
+    private String name;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "categories")
